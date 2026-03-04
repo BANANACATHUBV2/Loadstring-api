@@ -1,0 +1,13 @@
+local Http = syn and syn.request or http and http.request or request
+local hwid = tostring(game:GetService("RbxAnalyticsService"):GetClientId())
+
+local response = Http({
+    Url = "https://bananacat-api-liard.vercel.app/api/script?hwid=" .. hwid,
+    Method = "GET"
+})
+
+if response.StatusCode == 200 then
+    loadstring(response.Body)()
+else
+    warn("Erro: " .. response.Body)
+end
